@@ -1,5 +1,14 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
 
+// react hot-toast
+import toast, { Toaster } from 'react-hot-toast';
+
+// date fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
+
+
+
 const WorkoutDetails = ({ workout }) => {
     const { dispatch } = useWorkoutsContext()
 
@@ -13,7 +22,6 @@ const WorkoutDetails = ({ workout }) => {
             dispatch({type: 'DELETE_WORKOUT', payload: json})
         }
     }
-    
 
     return (
       <div className="workout-details">
@@ -26,8 +34,20 @@ const WorkoutDetails = ({ workout }) => {
           <strong>reps : </strong>
           {workout.reps}
         </p>
-        <p>{workout.createdAt}</p>
-        <span onClick={handleClick}>delete</span>
+        <p>
+          {formatDistanceToNow(new Date(workout.createdAt), {
+            addSuffix: true,
+          })}
+        </p>
+
+        <span
+          className="material-symbols-outlined"
+          id="delete-icon"
+          onClick={() => handleClick(toast.success("Deleted successfully"))}
+        >
+          delete
+        </span>
+        <Toaster />
       </div>
     );
 }

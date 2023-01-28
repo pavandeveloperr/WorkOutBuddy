@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
+// react hot-toast
+import toast, { Toaster } from 'react-hot-toast';
+
 const WorkoutForm = () => {
   const { dispatch } = useWorkoutsContext()
   const [title, setTitle] = useState("");
@@ -9,6 +12,13 @@ const WorkoutForm = () => {
   const [error, setError] = useState("");
   const [emptyFields, setEmptyFields] = useState([])
 
+  const handleSuccessFul = () =>
+    toast.success("successfully added the exercise", {
+      style: {
+        borderRadius: "10px",
+      },
+      duration: 2000,
+    });
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -68,7 +78,8 @@ const WorkoutForm = () => {
         className={emptyFields.includes('reps') ? 'error' : ''}
       />
 
-      <button>Add Workout</button>
+      <button onClick={handleSuccessFul}>Add Workout</button>
+      <Toaster />
       {error && <div className="error">{error}</div>}
     </form>
   );
