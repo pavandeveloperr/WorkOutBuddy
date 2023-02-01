@@ -1,5 +1,5 @@
 {
-  "homepage": "https://workoutbuddy-backend.onrender.com",
+  "proxy": "https://workoutbuddy-backend.onrender.com",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
